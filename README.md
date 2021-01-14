@@ -1,2 +1,1 @@
-# escaperoomv2
-Escape room V2
+Code for my escape room (VERSION 2)
