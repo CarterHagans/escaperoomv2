@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Escape Room - Room 1</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body id="room1body" onload=javascript:onPageLoad();>
+
+<h1 id="room1header">Room 1</h1>
+
+
+<div id="room1box">
+<h2 id="room1desc">Welcome to the first room!</h2>
+<p id="room1desc_2">In this room, you must be able to solve the math equations. <br>
+As you answer these math equations, you will wnat to keep track of your answers.<br>
+There will be a keypad at the end that will take a code. <br> Track your numbers wrong?
+You'll have to start all over again, so you better pay attention. <br> Good luck!</p>
+<button id="startoom1" onclick="startGame();">Begin</button>
+<h1 id="showmath"></h1>
+<h1 id="showmath2"></h1>
+<button id="answer1_r1"></button>
+<button id="answer2_r1"></button>
+<button id="answer3_r1"></button>
+<button id="answer4_r1"></button>
+<input id="enterroom1code" placeholder="Enter the code here: ">
+<h1 id="showentercode">Enter the code here: <br> Do not add the numbers, just combine them into one big number. No spaces.</h1>
+<button id="submitr1code" onclick="checkCode();">Submit code</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+function onPageLoad(){
+var room = localStorage.getItem("room")
+var button1 = document.getElementById("answer1_r1")
+var button2 = document.getElementById("answer2_r1")
+var button3 = document.getElementById("answer3_r1")
+var button4 = document.getElementById("answer4_r1")
+var enterroom1code = document.getElementById("enterroom1code")
+var showentercode = document.getElementById("showentercode")
+var submitr1code = document.getElementById("submitr1code")
+enterroom1code.style.visibility = "hidden";
+showentercode.style.visibility = "hidden";
+submitr1code.style.visibility = "hidden";
+button1.style.visibility = "hidden";
+button2.style.visibility = "hidden";
+button3.style.visibility = "hidden";
+button4.style.visibility = "hidden";
+if(room != 1){
+    alert("Alert: Your room state is not currently in the room you are in, if you think this is an error contact the host.")
+    window.location.replace("home.html")
+} if(room == 1 ){
+    return;
+}
+
+
+
+
+}
+
+
+function wrongAnswer(){
+   var currentwronganswers = localStorage.getItem("wrongAnswers")
+   var button1 = document.getElementById("answer1_r1")
+   var button2 = document.getElementById("answer2_r1")
+   var button3 = document.getElementById("answer3_r1")
+   var button4 = document.getElementById("answer4_r1")
+   if(currentwronganswers == null || currentwronganswers == 0){
+       alert("First incorrect answer, 10 second cooldown...")
+       button1.disabled = true
+       button2.disabled = true
+       button3.disabled = true
+       button4.disabled = true 
+       setTimeout(resetQuestion, 10000)
+       localStorage.setItem("wrongAnswers", "1")
+   } if(currentwronganswers == "1"){
+       alert("Second incorrect answer, 14 second cooldown...")
+       button1.disabled = true
+       button2.disabled = true
+       button3.disabled = true
+       button4.disabled = true 
+       setTimeout(resetQuestion, 14000)
+       localStorage.setItem("wrongAnswers", "2")
+   } if(currentwronganswers == "2"){
+    alert("Third incorrect answer, 20 second cooldown...")
+       button1.disabled = true
+       button2.disabled = true
+       button3.disabled = true
+       button4.disabled = true 
+       setTimeout(resetQuestion, 20000)
+       localStorage.setItem("wrongAnswers", "3")
+   } if(currentwronganswers == "3"){
+    alert("Fourth incorrect answer, it seems you are having problems.. 24 second cooldown, time will no longer go above 24 seconds for this room.")
+       button1.disabled = true
+       button2.disabled = true
+       button3.disabled = true
+       button4.disabled = true 
+       setTimeout(resetQuestion, 24000)
+       
+   }
+   
+    
+}
+
+function resetQuestion(){
+   var button1 = document.getElementById("answer1_r1")
+   var button2 = document.getElementById("answer2_r1")
+   var button3 = document.getElementById("answer3_r1")
+   var button4 = document.getElementById("answer4_r1")
+   button1.disabled = false
+   button2.disabled = false
+   button3.disabled = false
+   button4.disabled = false 
+   alert("Cooldown is up!")
+}
+
+
+
+
+
+
+function startGame(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+    button1.style.visibility = "visible";
+    button2.style.visibility = "visible";
+    button3.style.visibility = "visible";
+    button4.style.visibility = "visible";
+    music.play()
+    music.loop = true
+    title.style.visibility = 'hidden';
+    paragraph.style.visibility = 'hidden';
+    button.style.visibility = 'hidden';
+    mathequation.innerHTML = "Math equation: 1"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer1
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = answer
+    if(button2.innerHTML == button4.innerHTML || button3.innerHTML == button4.innerHTML || button1.innerHTML == button4.innerHTML){
+        button2.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button1.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "correctAnswer1();")
+    localStorage.setItem("answer1", answer)
+}
+
+function correctAnswer1(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q2.call()
+}
+
+function Q2(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 2"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = answer
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button1.innerHTML || button3.innerHTML == button1.innerHTML || button4.innerHTML == button1.innerHTML){
+        button2.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "correctAnswer2();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer2", answer)
+    
+}
+
+
+function correctAnswer2(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q3.call()
+}
+
+function Q3(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 3"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer2
+    button2.innerHTML = answer
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = showrandomanswer1
+    if(button1.innerHTML == button2.innerHTML || button3.innerHTML == button2.innerHTML || button4.innerHTML == button2.innerHTML){
+        button1.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "correctAnswer3();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer3", answer)
+}
+
+function correctAnswer3(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q4.call()
+}
+
+function Q4(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 4"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = answer
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button1.innerHTML || button3.innerHTML == button1.innerHTML || button4.innerHTML == button1.innerHTML){
+        button2.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "correctAnswer4();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer4", answer)
+}
+
+function correctAnswer4(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q5.call()
+}
+
+
+function Q5(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 5"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer1
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = answer
+    if(button2.innerHTML == button4.innerHTML || button3.innerHTML == button4.innerHTML || button1.innerHTML == button4.innerHTML){
+        button2.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button1.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "correctAnswer5();")
+    localStorage.setItem("answer5", answer)
+}
+
+
+
+function correctAnswer5(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q6.call()
+}
+
+function Q6(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 6"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = answer
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer3
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button1.innerHTML || button3.innerHTML == button1.innerHTML || button4.innerHTML == button1.innerHTML){
+        button2.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "correctAnswer6();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer6", answer)
+}
+
+function correctAnswer6(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q7.call()
+}
+
+function Q7(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 7"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer3
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = answer
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button3.innerHTML || button3.innerHTML == button3.innerHTML || button4.innerHTML == button3.innerHTML){
+        button2.innerHTML = "N/A"
+        button1.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "correctAnswer7();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer7", answer)
+}
+
+
+function correctAnswer7(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q8.call()
+}
+
+function Q8(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 8"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer3
+    button2.innerHTML = answer
+    button3.innerHTML = showrandomanswer2
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button2.innerHTML || button3.innerHTML == button2.innerHTML || button4.innerHTML == button2.innerHTML){
+        button1.innerHTML = "N/A"
+        button3.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "correctAnswer8();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer8", answer)
+}
+
+
+
+function correctAnswer8(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q9.call()
+}
+
+
+
+function Q9(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 9"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer3
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = answer
+    button4.innerHTML = showrandomanswer1
+    if(button2.innerHTML == button3.innerHTML || button3.innerHTML == button3.innerHTML || button4.innerHTML == button3.innerHTML){
+        button1.innerHTML = "N/A"
+        button2.innerHTML = "N/A"
+        button4.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "correctAnswer9();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer9", answer)
+}
+
+
+
+function correctAnswer9(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q10.call()
+}
+
+
+function Q10(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 10"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer3
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer1
+    button4.innerHTML = answer
+    if(button2.innerHTML == button4.innerHTML || button3.innerHTML == button4.innerHTML || button4.innerHTML == button4.innerHTML){
+        button1.innerHTML = "N/A"
+        button2.innerHTML = "N/A"
+        button3.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "correctAnswer10();")
+    localStorage.setItem("answer10", answer)
+}
+
+function correctAnswer10(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q11.call()
+}
+
+
+function Q11(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 11"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = answer
+    button2.innerHTML = showrandomanswer2
+    button3.innerHTML = showrandomanswer1
+    button4.innerHTML = showrandomanswer3
+    if(button2.innerHTML == button1.innerHTML || button3.innerHTML == button1.innerHTML || button4.innerHTML == button1.innerHTML){
+        button4.innerHTML = "N/A"
+        button2.innerHTML = "N/A"
+        button3.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "correctAnswer11();")
+    button2.setAttribute("onclick", "wrongAnswer();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer11", answer)
+}
+
+function correctAnswer11(){
+    alert("Correct! Make sure to keep track of your answers..")
+    Q12.call()
+}
+
+
+
+function Q12(){
+    var title = document.getElementById("room1desc")
+    var paragraph = document.getElementById("room1desc_2")
+    var button = document.getElementById("startoom1")
+    var music = new Audio("music.mp3")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var number1 = Math.random() * 15
+    var number2 = Math.random() * 15 
+    var randomanswer1 = Math.random() * 15
+    var randomanswer2 = Math.random() *15
+    var randomanswer3 = Math.random() * 15
+    var showrandomanswer1 = Math.round(randomanswer1)
+    var showrandomanswer2 = Math.round(randomanswer2)
+    var showrandomanswer3 = Math.round(randomanswer3)
+    var shownumber1 = Math.round(number1)
+    var shownumber2 = Math.round(number2)
+    var answer = shownumber1 + shownumber2
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+
+
+    mathequation.innerHTML = "Math equation: 12"
+    question.innerHTML = Math.round(shownumber1) + "+" + Math.round(shownumber2)
+    button1.innerHTML = showrandomanswer2
+    button2.innerHTML = answer
+    button3.innerHTML = showrandomanswer1
+    button4.innerHTML = showrandomanswer3
+    if(button2.innerHTML == button2.innerHTML || button3.innerHTML == button2.innerHTML || button4.innerHTML == button2.innerHTML){
+        button4.innerHTML = "N/A"
+        button1.innerHTML = "N/A"
+        button3.innerHTML = 'N/A'
+    }
+    button1.setAttribute("onclick", "wrongAnswer();")
+    button2.setAttribute("onclick", "correctAnswer12();")
+    button3.setAttribute("onclick", "wrongAnswer();")
+    button4.setAttribute("onclick", "wrongAnswer();")
+    localStorage.setItem("answer12", answer)
+}
+
+
+function correctAnswer12(){
+    alert("You have made it past the math equations, now.. It's time to enter your final key... :)")
+    enterKey.call()
+}
+
+function enterKey(){
+    var button1 = document.getElementById("answer1_r1")
+    var button2 = document.getElementById("answer2_r1")
+    var button3 = document.getElementById("answer3_r1")
+    var button4 = document.getElementById("answer4_r1")
+    var mathequation = document.getElementById("showmath")
+    var question = document.getElementById("showmath2")
+    var enterroom1code = document.getElementById("enterroom1code")
+    var showentercode = document.getElementById("showentercode")
+    var submitr1code = document.getElementById("submitr1code")
+    enterroom1code.style.visibility = "visible";
+    showentercode.style.visibility = "visible";
+    submitr1code.style.visibility = "visible";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
+    button4.style.visibility = "hidden";
+    mathequation.style.visibility = "hidden";
+    question.style.visibility = "hidden";
+
+}
+
+function checkCode(){
+    var answer1 = localStorage.getItem("answer1")
+    var answer2 = localStorage.getItem("answer2")
+    var answer3 = localStorage.getItem("answer3")
+    var answer4 = localStorage.getItem("answer4")
+    var answer5 = localStorage.getItem("answer5")
+    var answer6 = localStorage.getItem("answer6")
+    var answer7 = localStorage.getItem("answer7")
+    var answer8 = localStorage.getItem("answer8")
+    var answer9 = localStorage.getItem("answer9")
+    var answer10 = localStorage.getItem("answer10")
+    var answer11 = localStorage.getItem("answer11")
+    var answer12 = localStorage.getItem("answer12")
+    var enterroom1code = document.getElementById("enterroom1code").value
+    var pin = answer1 + answer2 + answer3 + answer4 + answer5 + answer6 + answer7 + answer8 + answer9 + answer10 + answer11 + answer12
+    console.log(pin)
+    if(enterroom1code == pin){
+        alert("You have done it! Click the button below to move to room 2 and your adventure will begin..")
+        window.location.replace("room2.html")
+        localStorage.setItem("room", 2)
+    } if(enterroom1code != pin){
+        alert("Incorrect, please check your typing. If you think your answer is wrong and have no way of checking, contact the host.")
+
+    }
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
