@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Escape Room - Room 2</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body id="room2body" onload=javascript:onPageLoad();>
+<h1 id="room2header">Room 2</h1>
+    
+<div id="room2box">
+<h1 id="r2title">Your adventure begins here...</h1>
+<p id="r2desc">Hello. Welcome to our coorperation. The company's name is secret 
+    services. I see that you have came to the company in order to apply for an internship position at our company.
+Let me introduce myself, my name is John and I am one of the owners of this company. The other owner of this company
+is not currently here, but their name is Bill. Let me explain the company, we are a secret government orginization
+that completes secret tasks for the United States government. The reason you are here is due to the fact that 
+we are hiring new intern agents to work for secret services. In this room, you will go through an interview
+with one of our recruiters. You are up against many other applicants so make sure that you can prove 
+yourself against the other applicants and make sure that you and your material stand out. If you pass
+the interview, you will be accepted as one of our new interns. The internship will be the span of
+rooms 3-12, this is if you pass the interview. So, go ahead and press the button below to contact the
+recruiter.</p>
+
+<button id="r2start" onclick="startRoom();">Contact recruiter</button>
+<h1 id="dialogue">Phone dialing...</h1>
+<textarea id="interviewanswers" placeholder="Enter your answer here: " rows="10", cols="50"> </textarea>
+<button id="submitinterviewanswer" onclick="submitAnswer1();">Submit answer</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+function onPageLoad(){
+    var room = localStorage.getItem("room")
+    var currentwronganswers = localStorage.getItem("wrongAnswers")
+    var dialogue = document.getElementById("dialogue")
+    var interviewanswers = document.getElementById("interviewanswers")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    submitinterviewanswer.style.visibility = "hidden";
+    interviewanswers.style.visibility = "hidden";
+    dialogue.style.visibility = "hidden";
+
+    if(currentwronganswers >= 1){
+    localStorage.setItem("wrongAnswers", 0)
+    
+
+} if(room != 2){
+    alert("Alert: Your room state is not currently in the room you are in, if you think this is an error contact the host.")
+    window.location.replace("home.html")
+
+    
+} if(room == 2 ){
+    return;
+} if(currentwronganswers == 0 || currentwronganswers == null){
+    return;
+}
+
+}
+
+
+
+function startRoom(){
+    var boom = new Audio('boom.mp3')
+    var dialing = new Audio('dialing.mp3')
+    var title = document.getElementById("r2title")
+    var desc = document.getElementById("r2desc")
+    var startbutton = document.getElementById("r2start")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.style.visibility = "visible";
+    boom.play()
+    dialing.play()
+    title.style.visibility = 'hidden';
+    desc.style.visibility = 'hidden';
+    startbutton.style.visibility = 'hidden';
+    setTimeout(emma1, 15000)
+}
+
+function emma1(){
+    var emma1 = new Audio("emma1.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "My name is Emma, a recruiter at a private government organization. Who are you and how can I help you?"
+    emma1.play()
+    setTimeout(micheal1, 6000)
+}
+function micheal1(){
+    var micheal1 = new Audio("michael1.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Hello, my name is Michael and I am applying for the internship position at the government organization named secret services. Are you the right person to talk to?"
+    micheal1.play()
+    setTimeout(emma2, 10500)
+}
+function emma2(){
+    var emma2 = new Audio("emma2.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Ahh, yes we are hiring. Okay, Micheal, I hear you have no experience. Is this correct?"
+    emma2.play()
+    setTimeout(micheal2, 7500)
+}
+function micheal2(){
+    var micheal2 = new Audio("micheal2.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Unfortunately, that is correct but I am really really really really really really INTERESTED! SO PLEASE!!!!!!!!!!!!!!!!!!!!!!"
+    micheal2.play()
+    setTimeout(emma3, 7500)
+}
+
+function emma3(){
+    var emma3 = new Audio("emma3.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Don't you worry, we still accept applicants with no experience. Have you had any sort of job?"
+    emma3.play()
+    setTimeout(micheal3, 6500)
+}
+
+function micheal3(){
+    var micheal3 = new Audio("micheal3.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Hahahahahahahahahah"
+    micheal3.play()
+    setTimeout(emma4, 30500)
+}
+
+function emma4(){
+    var emma4 = new Audio("emma4.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "What is so funny?"
+    emma4.play()
+    setTimeout(micheal4, 2500)
+}
+function micheal4(){
+    var micheal4 = new Audio("micheal4.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Oh, wait... You were serious? I actually don't have any experience..."
+    micheal4.play()
+    setTimeout(emma5, 5000)
+}
+function emma5(){
+    var emma5 = new Audio("emma5.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Oh.... I see, well that is AY OK! William will be your interviewer for today, let me fetch him... lol "
+    emma5.play()
+    setTimeout(william1, 8000)
+}
+
+function william1(){
+    var william1 = new Audio("william1.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "AYO! I am William, what is your name?"
+    william1.play()
+    setTimeout(micheal5, 4200)
+
+}
+
+function micheal5(){
+    var micheal5 = new Audio("micheal5.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "BRO! I ALREADY TOLD YOU MY NAME IS MICHEAL HOW MANY TIMES DO I NEED TO SAY MY NAME?"
+    micheal5.play()
+    setTimeout(william2, 7200)
+}
+
+
+function william2(){
+    var william2 = new Audio("william2.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Well, this guy has a 99% chance of getting rejected already, wow..."
+    william2.play()
+    setTimeout(micheal6, 6200)
+
+}
+
+function micheal6(){
+    var micheal6 = new Audio("micheal6.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "Oh no.. I forgot we haven't met! I am so sorry, sir. My name is Micheal, sorry for such a rude introduction and let me just tell you I am HONORED."
+    micheal6.play()
+    setTimeout(william3, 10500)
+}
+
+function william3(){
+    var william3 = new Audio("william3.mp3")
+    var dialogue = document.getElementById("dialogue")
+    dialogue.innerHTML = "It's okay... I guess... Now, let us begin the interview."
+    william3.play()
+    setTimeout(interview1, 5000)
+
+}
+
+function interview1(){
+    var question1 = new Audio("question1.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var interviewanswers = document.getElementById("interviewanswers")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    submitinterviewanswer.style.visibility = "visible";
+    interviewanswers.style.visibility = "visible";
+    dialogue.innerHTML = "What is your date of birth?"
+    question1.play()
+    
+}
+
+
+function submitAnswer1(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer1", interviewanswers)
+    interview2.call()
+}
+
+function interview2(){
+    var question1 = new Audio("question2.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    dialogue.innerHTML = "Which agent were you recruited by?"
+    question1.play()
+    submitinterviewanswer.setAttribute("onclick", "submitAnswer2();")
+}
+
+
+function submitAnswer2(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer2", interviewanswers)
+    interview3.call()
+}
+
+
+function interview3(){
+    var question1 = new Audio("question3.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    dialogue.innerHTML = "Why should we hire you?"
+    question1.play()
+    submitinterviewanswer.setAttribute("onclick", "submitAnswer3();")
+}
+
+
+function submitAnswer3(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer3", interviewanswers)
+    interview4.call()
+}
+
+function interview4(){
+    var question1 = new Audio("question4.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    dialogue.innerHTML = "How can you benefit the team?"
+    question1.play()
+    submitinterviewanswer.setAttribute("onclick", "submitAnswer4();")
+}
+
+
+function submitAnswer4(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer4", interviewanswers)
+    interview5.call()
+}
+
+
+function interview5(){
+    var question1 = new Audio("question5.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    dialogue.innerHTML = "How much time will you contribute?"
+    question1.play()
+    submitinterviewanswer.setAttribute("onclick", "submitAnswer5();")
+}
+
+
+
+function submitAnswer5(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer5", interviewanswers)
+    interview6.call()
+}
+
+
+function interview6(){
+    var question1 = new Audio("question6.mp3")
+    var dialogue = document.getElementById("dialogue")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    dialogue.innerHTML = "Will you be a good worker?"
+    question1.play()
+    submitinterviewanswer.setAttribute("onclick", "submitAnswer6();")
+}
+
+
+function submitAnswer6(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    localStorage.setItem("interviewAnswer6", interviewanswers)
+    conclusion.call()
+}
+
+function conclusion(){
+    var interviewanswers = document.getElementById("interviewanswers").value
+    var interviewanswers2 = document.getElementById("interviewanswers")
+    var submitinterviewanswer = document.getElementById("submitinterviewanswer")
+    var conclude = new Audio("conclude.mp3")
+    interviewanswers2.style.visibility = "hidden";
+    submitinterviewanswer.style.visibility = "hidden";
+    dialogue.innerHTML = "That concludes the interview, thank you for participating."
+    conclude.play()
+    setTimeout(transtor3, 6500)
+}
+
+function transtor3(){
+    var boom = new Audio("boom.mp3")
+    boom.play()
+    localStorage.setItem("room", 3)
+    alert("Congratulations on getting through the interview!! Results are in room 3, go there now.")
+    window.location.replace("room3.html")
+}
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

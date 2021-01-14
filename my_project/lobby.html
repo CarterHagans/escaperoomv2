@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Escape Room - Lobby</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body id="lobbybody">
+<h1 id="lobbyheader">The Escape Room - Lobby</h1>
+
+<h2 id="lobbydesc">70 minutes <br><br> 12 rooms <br><br> Can you do it?</h2>
+<h2 id="lobbydesc">Enter a username in the box below.</h2>
+<input type="text" placeholder="Enter a username here: " id="lobbyusername" required maxlength="50" minlength="3">
+<button type="submit" id="submitusername" onclick="submitUser();">Submit username</button>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function submitUser(){
+    var getuser = document.getElementById("lobbyusername").value;
+    var boom =  new Audio('boom.mp3')
+    
+    localStorage.setItem("playerusername", getuser)
+    if(getuser == ""){
+        alert("Don't forget a username!")
+    } if(getuser != ""){
+        boom.play();
+        setTimeout(redirecttowaiting, 2500)
+    }
+    
+}
+function redirecttowaiting(){
+    var getuser = localStorage.getItem("playerusername")
+    alert("Hi, " + getuser + " ! Click the button to continue.")
+    window.location.replace("waiting.html")
+
+}
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

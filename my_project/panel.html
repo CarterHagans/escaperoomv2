@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Escape Room - Admin Access</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<body id="panelbody" onload=javascript:onPageLoad();>
+
+
+<h1 id="panelheader">Escape Room Admin Panel - Access all rooms (bypass enforcer)</h1>
+
+<button id="room1_admin" onclick="accesstoR1();">Room 1</button>
+<button id="room2_admin" onclick="accesstoR2();">Room 2</button>
+<button id="room3_admin" onclick="accesstoR3();">Room 3</button>
+<button id="room4_admin" onclick="accesstoR4();">Room 4</button>
+<button id="room5_admin" onclick="accesstoR5();">Room 5</button>
+<button id="room6_admin" onclick="accesstoR6();">Room 6</button>
+<button id="room7_admin" onclick="accesstoR7();">Room 7</button>
+<button id="room8_admin" onclick="accesstoR8();">Room 8</button>
+<button id="room9_admin" onclick="accesstoR9();">Room 9</button>
+<button id="room10_admin" onclick="accesstoR10();">Room 10</button>
+<button id="room11_admin" onclick="accesstoR11();">Room 11</button>
+<button id="room12_admin" onclick="accesstoR12();">Room 12</button>
+
+
+
+
+<script>
+    
+function accesstoR1(){
+    localStorage.setItem("room", 1)
+    window.location.replace("room1.html")
+}
+
+function accesstoR2(){
+    localStorage.setItem("room", 2)
+    window.location.replace("room2.html")
+}
+
+function accesstoR3(){
+    localStorage.setItem("room", 3)
+    window.location.replace("room3.html")
+}
+
+function accesstoR4(){
+    localStorage.setItem("room", 4)
+    window.location.replace("room4.html")
+}
+
+function accesstoR5(){
+    localStorage.setItem("room", 5)
+    window.location.replace("room5.html")
+}
+
+
+function accesstoR6(){
+    localStorage.setItem("room", 6)
+    window.location.replace("room6.html")
+}
+
+
+
+function accesstoR7(){
+    localStorage.setItem("room", 7)
+    window.location.replace("room7.html")
+}
+
+function accesstoR8(){
+    localStorage.setItem("room", 8)
+    window.location.replace("room8.html")
+}
+
+
+
+function accesstoR9(){
+    localStorage.setItem("room", 9)
+    window.location.replace("room9.html")
+}
+
+
+function accesstoR10(){
+    localStorage.setItem("room", 10)
+    window.location.replace("room10.html")
+}
+
+function accesstoR11(){
+    localStorage.setItem("room", 11)
+    window.location.replace("room11.html")
+}
+
+
+function accesstoR12(){
+    localStorage.setItem("room", 12)
+    window.location.replace("room12.html")
+}
+
+function onPageLoad(){
+    var loggedin = localStorage.getItem("access")
+    if(loggedin == "false" || loggedin == null){
+        alert("Access denied... You do not have admin access, please login through the admin panel.")
+        window.location.replace("admin.html")
+    } if(loggedin == "true"){
+        return;
+    }
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>

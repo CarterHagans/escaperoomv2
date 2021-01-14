@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>The Escape Room - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body id="adminbody">
+<h1 id="adminheader">Please enter the admin login.</h1>
+
+<div id="adminbox">
+
+<h2 id="enteradminuser">Enter admin username: </h2>
+<h2 id="enteradminpass">Enter admin password: </h2>
+<input type="text" id="adminusername" placeholder="Enter username here: ">
+<input type="password" id="adminpassword" placeholder="Enter password here: ">
+<button id="adminlogin" onclick="adminLogin();">Login</button>
+
+</div>
+
+
+
+
+<script>
+
+
+function adminLogin(){
+    var adminusername = "admin"
+    var adminpassword = "EscapeRoom2021"
+    var enteredusername = document.getElementById("adminusername").value 
+    var enteredpass = document.getElementById("adminpassword").value
+
+    if(enteredusername == adminusername && enteredpass == adminpassword){
+        localStorage.setItem("access", true)
+        window.location.replace("panel.html")
+    } if(enteredusername != adminusername){
+        alert("Incorrect username, please try again and check your typing.")
+        localStorage.setItem("access", false)
+    }if(enteredpass != adminpassword){
+        alert("Incorrect password, pelase try again and check your typing.")
+        localStorage.setItem("access", false)
+    }
+}
+
+
+
+</script>
+
+
+</body>
+</html>
