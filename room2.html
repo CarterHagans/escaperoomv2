@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Escape Room - Room 2</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body id="room2body" onload=javascript:onPageLoad();>
+
+
+<div id="room2box">
+<h1 id="room2box_h">Run a Store!</h1>
+<p id="room2box_d">In this room, you must run a store and reach a specific balance, if you run out of money, you get a time 
+    pentalty. If you reach the balance, you can either decide to move to the next room or to keep going to earn a time bonus,
+    which will reduce your overall time, good luck! :) 
+</p>
+<button id="r2start" onclick="startRoom();">Start</button>
+<h1 id="r2_userbalance">Your Balance: </h1>
+<button id="b_openstore" onclick="openStore();">Open Store</button>
+<button id="b_closestore" onclick="closeStore();">Close Store</button>
+<h1 id="cat1">Employment:</h1>
+<button id="employment1">STAGE 1: Hire Management (FREE)</button>
+<h1 id="cat2">Advertisement:</h1>
+<button id="advertisement1">STAGE 1: Start advertisement ($5,000)</button>
+<h1 id="cat3">Locations:</h1>
+<button id="locations1">STAGE 1: Start expanding locations: ($10,000)</button>
+<h1 id="storestatus">Store Status:</h1>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    var r2_userbalance = document.getElementById("r2_userbalance")
+    var b_oepnstore = document.getElementById("b_openstore")
+    var b_closestore = document.getElementById("b_closestore")
+    var cat1 = document.getElementById("cat1")
+    var employment1 = document.getElementById("employment1")
+    var cat2 = document.getElementById("cat2")
+    var advertisement1 = document.getElementById("advertisement1")
+    var cat3 = document.getElementById("cat3")
+    var locations1 = document.getElementById("locations1")
+    var boom = new Audio("boom.mp3")
+    var head = document.getElementById("room2box_h")
+    var desc = document.getElementById("room2box_d")
+    var startbutton = document.getElementById("r2start")
+    var box = document.getElementById("room2box")
+    var startingprice = 100000
+    var b_oepnstore = document.getElementById("b_openstore")
+    var b_closestore = document.getElementById("b_closestore")
+    var storestatus = document.getElementById("storestatus")
+    var isStoreOpen = ""
+    var storeOpenSE = new Audio("storeOpen.mp3")
+    var buzzer = new Audio("buzzer.mp3")
+
+function onPageLoad(){
+    var room = localStorage.getItem("room")
+    var currentwronganswers = localStorage.getItem("wrongAnswers")
+
+    storestatus.style.visibility = "hidden";
+    locations1.style.visibility = "hidden";
+    cat3.style.visibility = "hidden";
+    advertisement1.style.visibility = "hidden";
+    employment1.style.visibility = "hidden";
+    cat2.style.visibility = "hidden";
+    cat1.style.visibility = "hidden";
+    b_oepnstore.style.visibility =  "hidden";
+    b_closestore.style.visibility = "hidden";
+    r2_userbalance.style.visibility = "hidden";
+
+    if(currentwronganswers >= 1){
+    localStorage.setItem("wrongAnswers", 0)
+    
+
+} if(room != 2){
+    alert("Alert: Your room state is not currently in the room you are in, if you think this is an error contact the host.")
+    window.location.replace("home.html")
+
+    
+} if(room == 2 ){
+    return;
+} if(currentwronganswers == 0 || currentwronganswers == null){
+    return;
+}
+
+}
+
+function startRoom(){
+
+    boom.play()
+
+
+    storestatus.style.visibility = "visible";
+    locations1.style.visibility = "visible";
+    cat3.style.visibility = "visible";
+    advertisement1.style.visibility = "visible";
+    employment1.style.visibility = "visible";
+    cat2.style.visibility = "visible";
+    cat1.style.visibility = "visible";
+    b_oepnstore.style.visibility =  "visible";
+    b_closestore.style.visibility = "visible";
+    r2_userbalance.innerHTML = "Your balance: " + startingprice
+    r2_userbalance.style.visibility = "visible";
+    head.style.visibility = "hidden";
+    desc.style.visibility = "hidden";
+    startbutton.style.visibility = "hidden";
+    box.style.width = "1200px";
+    box.style.height = "500px";
+    box.style.left = "30px";
+    box.style.top = "40px";
+}
+
+
+function openStore(){
+    isStoreOpen = "Open"
+    storestatus.innerHTML = "Store Status: " +  isStoreOpen
+    storeOpenSE.play()
+
+
+
+}
+
+
+function closeStore(){
+    isStoreOpen = "Closed"
+    storestatus.innerHTML = "Store Status: " +  isStoreOpen
+    buzzer.play()
+}
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
